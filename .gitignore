@@ -1,0 +1,8 @@
+src/config.py
+
+# VSCode
+.vscode
+
+# System generated files
+__pycache__
+.ipynb_checkpoints
