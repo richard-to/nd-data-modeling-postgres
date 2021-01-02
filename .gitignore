@@ -2,6 +2,7 @@ src/config.py
 
 # VSCode
 .vscode
+*.code-workspace
 
 # System generated files
 __pycache__

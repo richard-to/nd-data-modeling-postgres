@@ -40,12 +40,10 @@ def process_song_file(cur, filepath):
 
     # - The artist must be inserted first since the song has a foreign key dependency on artist.
     # - Latitude/longitude can be null, which Pandas converts into NaN
-    # - Duplicate artists will be ignored
     artist_columns = ["artist_id", "artist_name", "artist_location", "artist_latitude", "artist_longitude"]
     artist_data = list(df[artist_columns].values[0])
     cur.execute(sq.artist_table_insert, artist_data)
 
-    # - Duplicate songs will be ignored
     # - There are some instances where year is 0
     song_columns = ["song_id", "title", "artist_id", "year", "duration"]
     song_data = list(df[song_columns].values[0])
@@ -107,6 +105,9 @@ def process_log_file(cur, filepath):
     # - Keep the last duplicate since that will be the most up to date user
     # - It seems like it's possible for a user to move from free to paid, granted
     #   it's probably not likely in the same log file.
+    # - Note that dropping duplicates here does not prevent duplicates from other log files.
+    #   Those duplicates will be handled by the SQL insert query which has an ON CONFLICT clause.
+    #   We use drop_duplicates here to avoid inserting unnecessary duplicates.
     user_df = df[user_columns].drop_duplicates(keep="last")
 
     # insert user records

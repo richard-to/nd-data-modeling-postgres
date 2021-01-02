@@ -3,7 +3,7 @@
 ## Purpose of the database
 
 - Sparkify's analytics team wants to understand what songs their users are listening to
-- Currently song user activity data are stored in log files formatted in JSON format
+- Currently song and user activity data are stored in log files formatted in JSON
 - The JSON data is not easy to query
 - This database was created to make it easier for Sparkify's analytics team to find insights using SQL
 
@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS songplays (
 
 - Since the songplay_id is a database incremented ID, it's possible to reinsert the same event
   if you ingest the same log files multiple times.
+- Due to the small amount of sample data, almost all of of the artist_id/song_id values are NULL
 
 ### Dimension Table: songs
 
@@ -89,7 +90,7 @@ CREATE TABLE IF NOT EXISTS artists (
 
 #### Schema Notes
 
-- It's possible for latitude/longitude to `NaN` (not to be confused with NULL)
+- It's possible for latitude/longitude to be `NaN` (not to be confused with NULL)
 - Formatting of location column is inconsistent
   - Examples:
       - Hamilton, Ohio
@@ -123,7 +124,7 @@ way the date/time parts are broken up, one can ask many fascinating questions,
 such as:
 
 - What time of day do most paid users listen to songs?
-- How does the popularity of song change from month to month?
+- How does the popularity of a song change from month to month?
 
 #### Schema
 

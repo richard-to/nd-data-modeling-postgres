@@ -102,7 +102,7 @@ DO
 
 # - On conflict, update the record in case there are updates to the record
 # - Granted this is somewhat arbitrary since it's not guaranteed that the
-#   songs will be inserted in order.
+#   artists will be inserted in order.
 artist_table_insert = ("""
 INSERT INTO artists (artist_id, name, location, latitude, longitude)
 VALUES (%s, %s, %s, %s, %s)
